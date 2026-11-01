@@ -1,0 +1,32 @@
+# techpack/datarmnet/Kconfig
+
+menu "Datarmnet Driver"
+
+config RMNET_CORE
+	tristate "Qualcomm RMNET Core Driver"
+	default m
+	help
+    Say Y here if you want to include the RMNET Core driver.
+
+menuconfig RMNET_CTL
+	tristate "RMNET Control Driver"
+	default m
+	---help---
+	Enable the RMNET CTL module which is used for handling QMAP commands
+	for flow control purposes.
+	
+config RMNET_OFFLOAD
+	tristate "Qualcomm RMNET Offload Driver"
+	default m
+	depends on RMNET_CORE
+	help
+    Say Y here if you want to include RMNET Offload support.
+
+config RMNET_SHS
+	tristate "Qualcomm RMNET SHS Driver"
+	default m
+	depends on RMNET_CORE
+	help
+    Say Y here if you want to include RMNET SHS support.
+
+endmenu

@@ -1,0 +1,4 @@
+# techpack/datarmnet/Kbuild
+obj-$(CONFIG_RMNET_CORE)    += core/
+obj-$(CONFIG_RMNET_OFFLOAD) += offload/
+obj-$(CONFIG_RMNET_SHS)     += shs/
