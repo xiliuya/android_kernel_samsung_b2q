@@ -15,6 +15,9 @@ export CROSS_COMPILE_COMPAT="arm-linux-gnueabi-"
 export PATH="$SCRIPT_DIR/../clang-rb397f8/bin/:$PATH"
 export KBUILD_BUILD_TIMESTAMP=''
 
+# 禁止生成 __pycache__
+export PYTHONPYCACHEPREFIX=/tmp/kernel-pycache
+
 # 路径和性能设置
 OUT_DIR="$SCRIPT_DIR/out"
 MODULE_INSTALL_DIR="$SCRIPT_DIR/modules_install" # 定义模块目标文件夹
@@ -37,10 +40,13 @@ MAKE_ARGS=(
     -j"$JOBS"
     -C "$SCRIPT_DIR"
     O="$OUT_DIR"
+    V=1
 )
 
 echo "===> 正在为 $PRODUCT_NAME 生成 defconfig..."
 make "${MAKE_ARGS[@]}" "${KERNEL_MAKE_ENV[@]}" vendor/b2q_chn_hkx_defconfig
+
+#make "${MAKE_ARGS[@]}" "${KERNEL_MAKE_ENV[@]}" menuconfig
 
 echo "===> 正在使用 $JOBS 个并行任务编译内核..."
 make "${MAKE_ARGS[@]}" "${KERNEL_MAKE_ENV[@]}"
